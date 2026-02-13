@@ -1,0 +1,114 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/main/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Map Visualization Population Estimation Study",
+        "version": "pilot",
+        "authors": [
+            "Sarah Meyer",
+            "Cole Golding"
+        ],
+        "date": "2025-02-10",
+        "description": "This study aims to test users' ability to gauge population size on a map using four different map visualizations (Choropleth, spike, hexbin, and bubble).",
+        "organizations": [
+            "WPI"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "sjmeyer@wpi.edu",
+        "helpTextPath": "a3experiment/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "withSidebar": true
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "a3experiment/assets/introduction.md",
+            "response": []
+        },
+        "trial-choropleth-1": {
+            "type": "image",
+            "path": "a3experiment/assets/choropleth_1.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [
+                {
+                    "id": "choropleth-q1",
+                    "prompt": "Which region has a higher population?",
+                    "type": "radio",
+                    "options": ["Region A", "Region B", "They are equal"],
+                    "required": true
+                }
+            ]
+        },
+        "trial-choropleth-2": {
+            "type": "image",
+            "path": "a3experiment/assets/choropleth_2.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [
+                {
+                    "id": "choropleth-q2",
+                    "prompt": "Which region has a higher population?",
+                    "type": "radio",
+                    "options": ["Region A", "Region B", "They are equal"],
+                    "required": true
+                }
+            ]
+        },
+        "trial-spike-1": {
+            "type": "image",
+            "path": "a3experiment/assets/spike_1.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "spike-q1", "prompt": "Which region has a larger population?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        },
+        "trial-spike-2": {
+            "type": "image",
+            "path": "a3experiment/assets/spike_2.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "spike-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        },
+        "trial-hexbin-1": {
+            "type": "image",
+            "path": "a3experiment/assets/hexbin_1.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "hexbin-q1", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        },
+        "trial-hexbin-2": {
+            "type": "image",
+            "path": "a3experiment/assets/hexbin_2.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "hexbin-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        },
+        "trial-bubble-1": {
+            "type": "image",
+            "path": "a3experiment/assets/bubble_1.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "bubble-q1", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        },
+        "trial-bubble-2": {
+            "type": "image",
+            "path": "a3experiment/assets/bubble_2.png",
+            "instruction": "Identify which region has a larger population.",
+            "response": [{ "id": "bubble-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            {
+                "order": "random",
+                "components": [
+                    "trial-choropleth-1",
+                    "trial-choropleth-2",
+                    "trial-spike-1",
+                    "trial-spike-2",
+                    "trial-hexbin-1",
+                    "trial-hexbin-2",
+                    "trial-bubble-1",
+                    "trial-bubble-2"
+                ]
+            }
+        ]
+    }
+}
