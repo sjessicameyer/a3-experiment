@@ -1,0 +1,54 @@
+name: Deploy To GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  deploy-main:
+    runs-on: ubuntu-latest
+    # This tells GitHub to run EVERY step inside the 'revisit' folder
+    defaults:
+      run:
+        working-directory: ./revisit 
+        
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: 'yarn'
+          # Note: Caching might need the lockfile path if it fails
+          cache-dependency-path: ./revisit/yarn.lock 
+
+      - run: yarn install --immutable
+
+      # Build with .env file
+      - name: Build with .env file
+        if: ${{ vars.VITE_STORAGE_ENGINE == '' }}
+        run: yarn build
+
+      # Build with github environment variables
+      - name: Build with github environment variables
+        if: ${{ vars.VITE_STORAGE_ENGINE != '' }}
+        run: VITE_STORAGE_ENGINE=$VITE_STORAGE_ENGINE yarn build
+        env:
+          VITE_STORAGE_ENGINE: ${{ vars.VITE_STORAGE_ENGINE }}
+
+      - uses: peaceiris/actions-gh-pages@v3
+        name: Deploy
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # IMPORTANT: Point this to the dist folder INSIDE revisit
+          publish_dir: ./revisit/dist
