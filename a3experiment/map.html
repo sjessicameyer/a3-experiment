@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Map Placeholder</title>
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <!-- Load revisit-communicate to be able to send data to reVISit -->
+    <script src="../../revisitUtilities/revisit-communicate.js"></script>
+  </head>
+
+  <body>
+    <svg></svg>
+  </body>
+
+  <script>
+    // Get data from the config file
+    Revisit.onDataReceive((data) => {
+      // Retrieve parameters from config
+      const mapType = data.parameters ? data.parameters.mapType : 'default';
+
+      // Calculate or define the correct answer (ground truth)
+      // This value will be saved in the study data alongside the user's response
+      const trueValue = 5; 
+      Revisit.postAnswers({ groundTruth: trueValue });
+
+      const width = 800;
+      const height = 500;
+      const svg = d3.select('svg').attr('width', width).attr('height', height);
+
+      const projection = d3.geoMercator().scale(100).translate([width / 2, height / 2]);
+      const path = d3.geoPath().projection(projection);
+
+      d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson').then(geoData => {
+        svg.append('g')
+          .selectAll('path')
+          .data(geoData.features)
+          .join('path')
+          .attr('d', path)
+          .attr('fill', '#ccc')
+          .attr('stroke', '#fff');
+      });
+    });
+  </script>
+</html>

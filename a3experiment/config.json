@@ -21,75 +21,57 @@
         "autoDownloadStudy": false,
         "withSidebar": true
     },
+    "baseComponents": {
+      "map-base": {
+        "type": "website",
+        "path": "a3experiment/map.html",
+        "instructionLocation": "aboveStimulus"
+      }
+    },
     "components": {
         "introduction": {
             "type": "markdown",
             "path": "a3experiment/assets/introduction.md",
             "response": []
         },
-        "trial-choropleth-1": {
-            "type": "image",
-            "path": "a3experiment/assets/choropleth_1.png",
+        "trial-choropleth": {
+            "baseComponent": "map-base",
+            "parameters": {
+                "mapType": "choropleth"
+            },
             "instruction": "Identify which region has a larger population.",
             "response": [
                 {
-                    "id": "choropleth-q1",
-                    "prompt": "Which region has a higher population?",
-                    "type": "radio",
-                    "options": ["Region A", "Region B", "They are equal"],
+                    "id": "choropleth-response",
+                    "prompt": "How many times more populated is City A than City B?",
+                    "type": "numerical",
                     "required": true
                 }
             ]
         },
-        "trial-choropleth-2": {
-            "type": "image",
-            "path": "a3experiment/assets/choropleth_2.png",
+        "trial-spike": {
+            "baseComponent": "map-base",
+            "parameters": {
+                "mapType": "spike"
+            },
             "instruction": "Identify which region has a larger population.",
-            "response": [
-                {
-                    "id": "choropleth-q2",
-                    "prompt": "Which region has a higher population?",
-                    "type": "radio",
-                    "options": ["Region A", "Region B", "They are equal"],
-                    "required": true
-                }
-            ]
+            "response": [{ "id": "spike-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
         },
-        "trial-spike-1": {
-            "type": "image",
-            "path": "a3experiment/assets/spike_1.png",
+        "trial-hexbin": {
+            "baseComponent": "map-base",
+            "parameters": {
+                "mapType": "hexbin"
+            },
             "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "spike-q1", "prompt": "Which region has a larger population?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+            "response": [{ "id": "hexbin-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
         },
-        "trial-spike-2": {
-            "type": "image",
-            "path": "a3experiment/assets/spike_2.png",
+        "trial-bubble": {
+            "baseComponent": "map-base",
+            "parameters": {
+                "mapType": "bubble"
+            },
             "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "spike-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
-        },
-        "trial-hexbin-1": {
-            "type": "image",
-            "path": "a3experiment/assets/hexbin_1.png",
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "hexbin-q1", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
-        },
-        "trial-hexbin-2": {
-            "type": "image",
-            "path": "a3experiment/assets/hexbin_2.png",
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "hexbin-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
-        },
-        "trial-bubble-1": {
-            "type": "image",
-            "path": "a3experiment/assets/bubble_1.png",
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "bubble-q1", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
-        },
-        "trial-bubble-2": {
-            "type": "image",
-            "path": "a3experiment/assets/bubble_2.png",
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "bubble-q2", "prompt": "Which region is larger?", "type": "radio", "options": ["Region A", "Region B"], "required": true }]
+            "response": [{ "id": "bubble-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
         }
     },
     "sequence": {
@@ -99,14 +81,26 @@
             {
                 "order": "random",
                 "components": [
-                    "trial-choropleth-1",
-                    "trial-choropleth-2",
-                    "trial-spike-1",
-                    "trial-spike-2",
-                    "trial-hexbin-1",
-                    "trial-hexbin-2",
-                    "trial-bubble-1",
-                    "trial-bubble-2"
+                    "trial-choropleth",
+                    "trial-choropleth",
+                    "trial-choropleth",
+                    "trial-choropleth",
+                    "trial-choropleth",
+                    "trial-spike",
+                    "trial-spike",
+                    "trial-spike",
+                    "trial-spike",
+                    "trial-spike",
+                    "trial-hexbin",
+                    "trial-hexbin",
+                    "trial-hexbin",
+                    "trial-hexbin",
+                    "trial-hexbin",
+                    "trial-bubble",
+                    "trial-bubble",
+                    "trial-bubble",
+                    "trial-bubble",
+                    "trial-bubble"
                 ]
             }
         ]
