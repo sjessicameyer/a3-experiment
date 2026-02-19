@@ -35,15 +35,15 @@
         },
         "trial-choropleth": {
             "baseComponent": "map-base",
-            "path": "a3experiment/choropleth.html",
+						"path": "../../../mapFiles/Choropleth.html",
             "parameters": {
-                "mapType": "choropleth"
+                "mapType": "Choropleth"
             },
             "instruction": "Identify which region has a larger population.",
             "response": [
                 {
                     "id": "choropleth-response",
-                    "prompt": "How many times more populated is City A than City B?",
+                    "prompt": "How much larger is State A than State B?",
                     "type": "numerical",
                     "required": true
                 }
@@ -51,30 +51,30 @@
         },
         "trial-spike": {
             "baseComponent": "map-base",
-            "path": "a3experiment/spike.html",
+						"path": "../../../mapFiles/Spike.html",
             "parameters": {
-                "mapType": "spike"
+                "mapType": "Spike"
             },
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "spike-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
+            "instruction": "Identify which city has a larger population.",
+            "response": [{ "id": "spike-response", "prompt": "How much larger is City A than City B?", "type": "numerical", "required": true }]
         },
         "trial-hexbin": {
             "baseComponent": "map-base",
-            "path": "a3experiment/hexbin.html",
+						"path": "../../../mapFiles/Hexbin.html",
             "parameters": {
-                "mapType": "hexbin"
+                "mapType": "Hexbin"
             },
             "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "hexbin-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
+            "response": [{ "id": "hexbin-response", "prompt": "How much larger is Region A than Region B?", "type": "numerical", "required": true }]
         },
         "trial-bubble": {
             "baseComponent": "map-base",
-            "path": "a3experiment/bubble.html",
+						"path": "../../../mapFiles/Bubble.html",
             "parameters": {
-                "mapType": "bubble"
+                "mapType": "Bubble"
             },
-            "instruction": "Identify which region has a larger population.",
-            "response": [{ "id": "bubble-response", "prompt": "How many times more populated is City A than City B?", "type": "numerical", "required": true }]
+            "instruction": "Identify which city has a larger population.",
+            "response": [{ "id": "bubble-response", "prompt": "How much larger is City A than City B?", "type": "numerical", "required": true }]
         }
     },
     "sequence": {
