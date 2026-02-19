@@ -1,0 +1,5 @@
+parameters_mapType,abs_error_mean,abs_error_ci95,duration_sec_mean,duration_sec_ci95,trial_count
+Bubble,0.0,3.54,13.8,4.0,54.0
+Choropleth,2.78,2.32,17.3,6.02,54.0
+Hexbin,3.06,2.88,25.43,12.23,54.0
+Spike,3.15,5.44,13.14,2.65,54.0
