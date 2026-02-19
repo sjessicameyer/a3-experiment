@@ -24,7 +24,6 @@
     "baseComponents": {
       "map-base": {
         "type": "website",
-        "path": "a3experiment/map.html",
         "instructionLocation": "aboveStimulus"
       }
     },
@@ -36,6 +35,7 @@
         },
         "trial-choropleth": {
             "baseComponent": "map-base",
+            "path": "a3experiment/choropleth.html",
             "parameters": {
                 "mapType": "choropleth"
             },
@@ -51,6 +51,7 @@
         },
         "trial-spike": {
             "baseComponent": "map-base",
+            "path": "a3experiment/spike.html",
             "parameters": {
                 "mapType": "spike"
             },
@@ -59,6 +60,7 @@
         },
         "trial-hexbin": {
             "baseComponent": "map-base",
+            "path": "a3experiment/hexbin.html",
             "parameters": {
                 "mapType": "hexbin"
             },
@@ -67,6 +69,7 @@
         },
         "trial-bubble": {
             "baseComponent": "map-base",
+            "path": "a3experiment/bubble.html",
             "parameters": {
                 "mapType": "bubble"
             },
