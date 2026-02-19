@@ -35,7 +35,7 @@
         },
         "trial-choropleth": {
             "baseComponent": "map-base",
-						"path": "../../../mapFiles/Choropleth.html",
+						"path": "a3experiment/mapFiles/Choropleth.html",
             "parameters": {
                 "mapType": "Choropleth"
             },
@@ -51,7 +51,7 @@
         },
         "trial-spike": {
             "baseComponent": "map-base",
-						"path": "../../../mapFiles/Spike.html",
+						"path": "a3experiment/mapFiles/Spike.html",
             "parameters": {
                 "mapType": "Spike"
             },
@@ -60,7 +60,7 @@
         },
         "trial-hexbin": {
             "baseComponent": "map-base",
-						"path": "../../../mapFiles/Hexbin.html",
+						"path": "a3experiment/mapFiles/Hexbin.html",
             "parameters": {
                 "mapType": "Hexbin"
             },
@@ -69,7 +69,7 @@
         },
         "trial-bubble": {
             "baseComponent": "map-base",
-						"path": "../../../mapFiles/Bubble.html",
+						"path": "a3experiment/mapFiles/Bubble.html",
             "parameters": {
                 "mapType": "Bubble"
             },
