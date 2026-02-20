@@ -54,6 +54,7 @@ def run_experiment_analysis(file_path):
             ci = sem * stats.t.ppf((1 + 0.95) / 2., len(vals) - 1)
             row[f'{metric}_mean'] = round(mean, 2)
             row[f'{metric}_ci95'] = round(ci, 2)
+        row['count'] = len(subset)
         summary_list.append(row)
     
     summary_df = pd.DataFrame(summary_list).set_index('MapType')
@@ -113,7 +114,7 @@ def export_visualizations(summary_df, data):
 
     hist_plot = (
         ggplot(data, aes(x='bias', fill='parameters_mapType'))
-        + geom_histogram(binwidth=10, color="black", alpha=0.7, show_legend=False)
+        + geom_histogram(binwidth=5, color="black", alpha=0.7, show_legend=False)
         + geom_vline(xintercept=0, linetype="dashed", color="red", size=1)
         + facet_wrap('~parameters_mapType')
         + labs(title='Error Distribution by Map Type',
