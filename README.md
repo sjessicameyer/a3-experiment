@@ -85,7 +85,7 @@ In conclusion, our results partially supported our hypothesis. We correctly pred
 ## References
 * [Finding Random Points in a Pologon from ObservableHQ](https://observablehq.com/@essingen123/finding-random-points-in-a-polygon)
 * [Stack Overflow](https://stackoverflow.com/a/4492417/31040913)
-* [ReVISit] (https://revisit.dev/docs/introduction/)
+* [ReVISit](https://revisit.dev/docs/introduction/)
 * [D3.js](https://d3js.org/)
 * [Plotnine](https://plotnine.readthedocs.io/)
 * [Statsmodels](https://www.statsmodels.org/)
