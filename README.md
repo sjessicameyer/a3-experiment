@@ -51,27 +51,35 @@ We analyzed the results based on two primary metrics:
 2. **Bias**: The directional difference indicating tendencies to over- or under-estimate.
 
 ### Key Findings
-* **Best Performer**: **[Insert Map Type]** had the lowest mean absolute error.
-* **Bias Trends**: [TODO]
-* **Statistical Significance**: [TODO].
+* **Best Performer**: **Choropleth Maps** had the lowest mean absolute error (7.69), followed by Hexbin (9.41), Spike (10.68), and Bubble (12.53).
+* **Bias Trends**: **Bubble Maps** were the only visualization where users consistently **underestimated** values (Mean Bias: -3.43). In contrast, users tended to **overestimate** values with Hexbin (+3.41) and Choropleth (+2.97) maps.
+* **Statistical Significance**: 
+    *   **Absolute Error**: An ANOVA test revealed significant differences between groups (F=3.30, p=0.02). A post-hoc Tukey HSD test confirmed that **Choropleth maps yielded significantly lower error than Bubble maps** (p=0.013).
+    *   **Bias**: There was a significant difference in bias (p=0.007). Bubble maps were significantly different from both Choropleth and Hexbin maps, confirming the directional difference in estimation errors.
 
-![Error Histogram](data_analysis/errror_histogram.png)
+![Error Histogram](data_analysis/error_histogram.png)
 ![Error Plot](data_analysis/absolute_error_plot.png)
 ![Bias Plot](data_analysis/bias_plot.png)
 
 ---
 
 ## Technical Achievements
-- **Custom Map Implementation**: Implemented four distinct D3.js map visualizations using TopoJSON and specific projection scaling.
+- **Custom Map Implementation**: Implemented four distinct D3.js map visualizations with fully randomized populations and map polygon shapes.
 - **Data Pipeline**: Created a robust analysis pipeline in Python (`analysis.py`) that merges user responses with ground truth data, performs cleaning, and runs statistical tests (ANOVA, Tukey HSD).
 - **Automated Visualization**: The analysis script automatically generates error bars and bias distribution plots using `plotnine`.
 
 ## Design Achievements
 - **Clean UI**: Designed a distraction-free experiment interface to focus participant attention on the map tasks.
-- **Color & Scale**: Carefully selected color scales (e.g., ColorBrewer schemes) to ensure accessibility and clarity across map types.
+- **Color & Scale**: Carefully selected color scales to ensure accessibility and clarity across map and graph types.
 
 ---
 
 ## References
-* [Insert Paper or Library Link 1]
-* [Insert Paper or Library Link 2]
+* [Finding Random Points in a Pologon from ObservableHQ](https://observablehq.com/@essingen123/finding-random-points-in-a-polygon)
+* [Stack Overflow](https://stackoverflow.com/a/4492417/31040913)
+* [ReVISit] (https://revisit.dev/docs/introduction/)
+* [D3.js](https://d3js.org/)
+* [Plotnine](https://plotnine.readthedocs.io/)
+* [Statsmodels](https://www.statsmodels.org/)
+* [Font Awesome](https://fontawesome.com/)
+* [Firebase](https://firebase.google.com/)
