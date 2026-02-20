@@ -59,10 +59,10 @@ We analyzed the results based on two primary metrics:
 
 ![Error Histogram](data_analysis/error_histogram.png)
 *This histogram displays trends in the types of errors in estimates by map type with a bin size of 5. The most notable trend is significant underestimates in the bubble plot.*
-<br>
+<br><br>
 ![Error Plot](data_analysis/absolute_error_plot.png)
 *This bar graph shows mean absolute error by map type with 95% confidence intervals. The most significant outcome is that the bubble plot has higher error compared to the choropleth map.*
-<br>
+<br><br>
 ![Bias Plot](data_analysis/bias_plot.png)
 *This bar graph shows mean bias by map type with 95% confidence intervals. Bias was calculated as User Guess - Actual and represents trends in over or underestimation. Positive bias indicates overestimation while negative represents underestimation. The most significant trend is that bubble plots tend to cause underestimations compared to other map types.*
 
