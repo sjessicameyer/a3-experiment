@@ -16,11 +16,11 @@ We designed a controlled user study to compare four different geographical visua
 3. **Spike Map**
 4. **Hexbin Map**
 
-### The Task
-Participants were presented with a map visualization and asked to estimate the population of a specific region or city. We collected 20 trials per participant (5 per map type) to ensure robust data. Trial order was randomized and the even the map shape and data itself was fully randomized. Since hex bin maps are typically multivariate, both size and colors in this case correlated with population. 
-
 ### Hypothesis
 We hypothesized that cloropleth maps would yield lower estimation errors, followed by bubble maps, spike maps, and finally hex bin maps. 
+
+### The Task
+Participants were presented with a map visualization and asked to estimate the population of a specific region or city. We collected 20 trials per participant (5 per map type) to ensure robust data. Trial order was randomized and the even the map shape and data itself was fully randomized. Since hex bin maps are typically multivariate, both size and colors in this case correlated with population. 
 
 ### Data Collection
 We asked n = 19 friends, family, and classmates to fill out this survey, which we hosted on Github. Participants were asked to use a laptop or desktop computer for the experiment. Participants were allowed to contact us for more clarification. No identifiable information was collected during the experiment.
@@ -58,8 +58,14 @@ We analyzed the results based on two primary metrics:
     *   **Bias**: There was a significant difference in bias (p=0.007). Bubble maps were significantly different from both Choropleth and Hexbin maps, confirming the directional difference in estimation errors.
 
 ![Error Histogram](data_analysis/error_histogram.png)
+*This histogram displays trends in the types of errors in estimates by map type with a bin size of 5. The. most notable trend is significant underestimates in the bubble plot.*
 ![Error Plot](data_analysis/absolute_error_plot.png)
+*This bar graph shows mean absolute error by map type with 95% confidence intervals. The most significant outcome is that the bubble plot has higher error compared to the choropleth map.*
 ![Bias Plot](data_analysis/bias_plot.png)
+*This bar graph shows mean bias by map type with 95% confidence intervals. Bias was calculated as User Guess - Actual and represents trends in over or underestimation. Positive bias indicates overestimation while negative represents underestimation. The most significant trend is that bubble plots tend to cause underestimations compared to other map types.*
+
+### Conclusion
+In conclusion, our results partially supported our hypothesis. We correctly predicted that Choropleth maps would result in the lowest estimation error, likely due to the ease of comparing color intensity against a legend. However, contrary to our expectation that Bubble maps would be the second best, they actually resulted in the highest error and significant underestimation. This aligns with existing research suggesting that humans struggle to accurately judge area, often scaling by radius instead. Conversely, Hexbin maps performed better than expected (2nd place), suggesting that color-based encoding was more effective than size-based encoding for this specific task. Consequently, we recommend using Choropleth maps for tasks requiring precise value estimation.
 
 ---
 
