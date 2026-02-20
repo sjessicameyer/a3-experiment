@@ -4,6 +4,8 @@ from scipy import stats
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
+from plotnine import (ggplot, aes, geom_bar, geom_errorbar, geom_hline, 
+                      labs, theme_minimal, facet_wrap, theme, element_text)
 
 def run_experiment_analysis(file_path):
     # Load data
@@ -75,6 +77,45 @@ def run_experiment_analysis(file_path):
     
     return summary_df, anova_table, tukey, anova_bias, tukey_bias
 
+def export_visualizations(summary_df):
+    plot_data = summary_df.reset_index()
+
+    error_plot = (
+        ggplot(plot_data, aes(x='MapType', y='abs_error_mean', fill='MapType'))
+        + geom_bar(stat='identity', show_legend=False)
+        + geom_errorbar(
+            aes(ymin='abs_error_mean - abs_error_ci95', 
+                ymax='abs_error_mean + abs_error_ci95'), 
+            width=0.2
+        )
+        + labs(title='Mean Absolute Error by Map Type',
+               subtitle='Error bars represent 95% Confidence Intervals',
+               y='Absolute Error', x='')
+        + theme_minimal()
+        + theme(axis_text_x=element_text(rotation=45, hjust=1))
+    )
+    
+    bias_plot = (
+        ggplot(plot_data, aes(x='MapType', y='bias_mean', fill='MapType'))
+        + geom_bar(stat='identity', show_legend=False)
+        + geom_errorbar(
+            aes(ymin='bias_mean - bias_ci95', 
+                ymax='bias_mean + bias_ci95'), 
+            width=0.2
+        )
+        + geom_hline(yintercept=0, linetype='dashed', color='red', size=1)
+        + labs(title='Mean Bias by Map Type',
+               subtitle='Positive = Overestimation | Negative = Underestimation',
+               y='Bias (User - Truth)', x='')
+        + theme_minimal()
+        + theme(axis_text_x=element_text(rotation=45, hjust=1))
+    )
+
+    error_plot.save("absolute_error_plot.png", width=8, height=6, dpi=300)
+    bias_plot.save("bias_plot.png", width=8, height=6, dpi=300)
+    
+    print("Graphs exported successfully.")
+
 # Run it
 summary, anova, tukey, anova_bias, tukey_bias= run_experiment_analysis('a3experiment_all_tidy.csv')
 print("--- Summary Statistics ---")
@@ -89,3 +130,5 @@ print(anova_bias)
 
 print("\n--- Tukey HSD (Bias) ---")
 print(tukey_bias)
+
+export_visualizations(summary)
