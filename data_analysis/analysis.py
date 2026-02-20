@@ -4,7 +4,7 @@ from scipy import stats
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
-from plotnine import (ggplot, aes, geom_bar, geom_errorbar, geom_hline, 
+from plotnine import (ggplot, aes, geom_bar, geom_errorbar, geom_hline, geom_vline, geom_histogram,
                       labs, theme_minimal, facet_wrap, theme, element_text)
 
 def run_experiment_analysis(file_path):
@@ -75,9 +75,9 @@ def run_experiment_analysis(file_path):
                                groups=data['parameters_mapType'], 
                                alpha=0.05)
     
-    return summary_df, anova_table, tukey, anova_bias, tukey_bias
+    return data, summary_df, anova_table, tukey, anova_bias, tukey_bias
 
-def export_visualizations(summary_df):
+def export_visualizations(summary_df, data):
     plot_data = summary_df.reset_index()
 
     error_plot = (
@@ -111,13 +111,24 @@ def export_visualizations(summary_df):
         + theme(axis_text_x=element_text(rotation=45, hjust=1))
     )
 
+    hist_plot = (
+        ggplot(data, aes(x='bias', fill='parameters_mapType'))
+        + geom_histogram(binwidth=10, color="black", alpha=0.7, show_legend=False)
+        + geom_vline(xintercept=0, linetype="dashed", color="red", size=1)
+        + facet_wrap('~parameters_mapType')
+        + labs(title='Error Distribution by Map Type',
+               x='Error (User - Truth)', y='Count')
+        + theme_minimal()
+    )
+
     error_plot.save("absolute_error_plot.png", width=8, height=6, dpi=300)
     bias_plot.save("bias_plot.png", width=8, height=6, dpi=300)
+    hist_plot.save("error_histogram.png", width=10, height=6, dpi=300)
     
     print("Graphs exported successfully.")
 
 # Run it
-summary, anova, tukey, anova_bias, tukey_bias= run_experiment_analysis('a3experiment_all_tidy.csv')
+data, summary, anova, tukey, anova_bias, tukey_bias= run_experiment_analysis('a3experiment_all_tidy.csv')
 print("--- Summary Statistics ---")
 print(summary)
 print("\n--- ANOVA Results ---")
@@ -131,4 +142,4 @@ print(anova_bias)
 print("\n--- Tukey HSD (Bias) ---")
 print(tukey_bias)
 
-export_visualizations(summary)
+export_visualizations(summary, data)
