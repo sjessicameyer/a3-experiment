@@ -31,7 +31,7 @@ We asked n = 19 friends, family, and classmates to fill out this survey, which w
 
 | Bubble Map | Choropleth Map |
 | :---: | :---: |
-| ![Bubble Map](img/bubble.png) | ![Choropleth Map](img/choro.png) |
+| ![Bubble Map](img/bubble.png) | ![Choropleth Map](img/choropleth.png) |
 | **Spike Map** | **Hexbin Map** |
 | ![Spike Map](img/spike.png) | ![Hexbin Map](img/hexbin.png) |
 
