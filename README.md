@@ -1,6 +1,6 @@
 # Assignment 3 - Map Visualization Experiment
 
-**Team Members**: Sarah Meyer and Cole Goulding
+**Team Members**: Sarah Meyer and Cole Golding
 
 ## Experiment Link
 [**> Click here to view the Live Experiment <**](https://sjessicameyer.github.io/a3-experiment/a3experiment/SEVFVUNGaWFCVEhiMU55ajRqczliUT09)
