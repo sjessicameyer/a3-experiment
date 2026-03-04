@@ -48,12 +48,17 @@ def run_experiment_analysis(file_path):
         subset = data[data['parameters_mapType'] == mtype]
         row = {'MapType': mtype}
         for metric in ['abs_error', 'bias']:
-            vals = subset[metric].dropna()
+            vals = subset[metric].dropna().values
             mean = np.mean(vals)
-            sem = stats.sem(vals)
-            ci = sem * stats.t.ppf((1 + 0.95) / 2., len(vals) - 1)
+            
+            # Bootstrapped CI
+            res = stats.bootstrap((vals,), np.mean, confidence_level=0.95)
+            ci_low = res.confidence_interval.low
+            ci_high = res.confidence_interval.high
+            
             row[f'{metric}_mean'] = round(mean, 2)
-            row[f'{metric}_ci95'] = round(ci, 2)
+            row[f'{metric}_ci_low'] = round(ci_low, 2)
+            row[f'{metric}_ci_high'] = round(ci_high, 2)
         row['count'] = len(subset)
         summary_list.append(row)
     
@@ -69,12 +74,12 @@ def run_experiment_analysis(file_path):
 
     # Tukey HSD
     tukey = pairwise_tukeyhsd(endog=data['abs_error'], 
-                            groups=data['parameters_mapType'], 
-                            alpha=0.05)
+                              groups=data['parameters_mapType'], 
+                              alpha=0.05)
     #Tukey on bias
     tukey_bias = pairwise_tukeyhsd(endog=data['bias'], 
-                               groups=data['parameters_mapType'], 
-                               alpha=0.05)
+                                   groups=data['parameters_mapType'], 
+                                   alpha=0.05)
     
     return data, summary_df, anova_table, tukey, anova_bias, tukey_bias
 
@@ -85,12 +90,12 @@ def export_visualizations(summary_df, data):
         ggplot(plot_data, aes(x='MapType', y='abs_error_mean', fill='MapType'))
         + geom_bar(stat='identity', show_legend=False)
         + geom_errorbar(
-            aes(ymin='abs_error_mean - abs_error_ci95', 
-                ymax='abs_error_mean + abs_error_ci95'), 
+            aes(ymin='abs_error_ci_low', 
+                ymax='abs_error_ci_high'), 
             width=0.2
         )
         + labs(title='Mean Absolute Error by Map Type',
-               subtitle='Error bars represent 95% Confidence Intervals',
+               subtitle='Error bars represent Bootstrapped 95% Confidence Intervals',
                y='Absolute Error', x='')
         + theme_minimal()
         + theme(axis_text_x=element_text(rotation=45, hjust=1))
@@ -100,8 +105,8 @@ def export_visualizations(summary_df, data):
         ggplot(plot_data, aes(x='MapType', y='bias_mean', fill='MapType'))
         + geom_bar(stat='identity', show_legend=False)
         + geom_errorbar(
-            aes(ymin='bias_mean - bias_ci95', 
-                ymax='bias_mean + bias_ci95'), 
+            aes(ymin='bias_ci_low', 
+                ymax='bias_ci_high'), 
             width=0.2
         )
         + geom_hline(yintercept=0, linetype='dashed', color='red', size=1)
